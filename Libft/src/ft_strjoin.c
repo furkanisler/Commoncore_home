@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: misler <misler@student.42kocaeli.com.tr>   +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/08 23:06:27 by misler            #+#    #+#             */
+/*   Updated: 2022/10/08 23:19:31 by misler           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/libft.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int	i;
-	int	j;
-	int	m;
-	int	n;
+	int		i;
+	int		j;
+	int		m;
+	int		n;
 	char	*dest;
 
 	i = ft_strlen(s1);
@@ -22,11 +34,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	while (n < i + j)
 	{
-		dest[n] = s2[m];
-		n++;
-		m++;
+		dest[n++] = s2[m++];
 	}
 	dest[n] = '\0';
 	return (dest);
 }
-

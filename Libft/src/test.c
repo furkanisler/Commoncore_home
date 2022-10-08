@@ -12,7 +12,13 @@ char	mapi(unsigned int n, char s)
 void	iteri(unsigned int n, char *s)
 {
 	(void)n;
-	*s += 1;
+    int i;
+    i = 0;
+    while (s[i] != '\0')
+    {
+        s[i] += 1;
+        i++;
+    }
 }
 
 int main()
@@ -38,16 +44,16 @@ int main()
 
 	char	bu[] = "bukimya";
 	ft_memmove(bu, bu + 1, 3);
-	printf("ft_ dest > src:   %s\n", bu);
+	printf("ft_ dest > src:%s\n", bu);
 	char	yu[] = "bukimya";
 	memmove(yu, yu + 1, 3);
-	printf("ori_ dest < src:   %s\n", yu);
+	printf("ori_ dest < src:%s\n", yu);
 	char	su[] = "bukimya";
 	ft_memmove(su + 1, su, 3);
-	printf("ft_memmove test (dest > src):   %s\n", su);
+	printf("ft_memmove test (dest > src):%s\n", su);
 	char	ku[] = "bukimya";
 	memmove(ku + 1, ku, 3);
-	printf("original memmove dest > src:   %s\n", ku);
+	printf("original memmove dest > src:%s\n", ku);
 
 	printf("\n\n\nMEMMOVE DONE\t\t\tSTRLCPY START\n\n\n");
 
@@ -73,11 +79,11 @@ int main()
 	int	bud;
 	printf("dest: %s\n", hop);
 	printf("src: %s\n", ben);
-//	bud = strlcpy(hop, ben, 4);
+	bud = strlcpy(hop, ben, 4);
 	printf("strlcpy yok la. nası oluyoır çözemedim şuanlık.\n");
 	printf("sonuc dest: %s\n", hop);
 	printf("sonuc src: %s\n", ben);
-//	printf("return deg: %d\n", bud);
+	printf("return deg: %d\n", bud);
 	
 	
 	printf("\n\n\n FT_STRLCPY  DONE\n\t\t\tFT_STRLEN START\n\n");
