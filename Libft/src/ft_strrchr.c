@@ -18,6 +18,8 @@ char	*ft_strrchr(const char *s, int c)
 
 	i = ft_strlen(s);
 	i--;
+	if (s == NULL)
+		return (NULL);
 	while (i >= 0)
 	{
 		if (s[i] == c)
