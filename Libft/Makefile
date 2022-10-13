@@ -1,15 +1,10 @@
-NAME		=	libft.a
+CC 		=	gcc
 
-CC			=	gcc
+CFLAGS 	=	-Werror -Wextra -Wall
 
-CFLAGS		=	-Wall -Wextra -Werror
+NAME 	=	libft.a
 
-# directories
-SRC_DIR		=	src/
-OBJ_DIR		=	obj/
-INC_DIR		=	include/
-
-SRC_FILES	=	ft_atoi.c\
+SRC		=	ft_atoi.c\
 			ft_bzero.c\
 			ft_calloc.c\
 			ft_isalnum.c\
@@ -43,24 +38,37 @@ SRC_FILES	=	ft_atoi.c\
 			ft_substr.c\
 			ft_tolower.c\
 			ft_toupper.c\
+			
+BONUS	=	ft_lstnew.c\
+			ft_lstadd_front.c\
+			ft_lstsize.c\
+			ft_lstlast.c\
+			ft_lstadd_back.c\
+			ft_lstdelone.c\
+			ft_lstclear.c\
+			ft_lstiter.c\
+			ft_lstmap.c\
 
-OBJ_FILES	=	${SRC_FILES:.c=.o}
+OBJ		=	$(SRC:.c=.o)
 
-# paths
-SRC		=	$(addprefix $(SRC_DIR), $(SRC_FILES))
+OBJ_BON	=	$(BONUS:.c=.o)
 
-all: $(NAME)
+all		:	$(NAME)
 
-# compiling it to .a file
-$(NAME): $(OBJ)
-	@ar -crs $(NAME) $(OBJ)
+$(NAME)	:
+	@$(CC) $(GFLAGS) -c $(SRC) -I includes
+	@ar rc $(NAME) $(OBJ)
 
-# clean rule
-clean:
-	rm -rf *.o
+bonus	:
+	@$(CC) $(CFLAGS) -c $(BONUS) -I includes
+	@ar rc $(NAME) $(OBJ_BON)
 
-# re rule
-re : fclean all
+clean	:
+	@rm -f $(OBJ) $(OBJ_BON)
 
-# phony
-.PHONY: all clean fclean re
+fclean	: clean
+	@rm -f $(NAME)
+
+re		: fclean all
+
+.PHONY	: all bonus clean fclean re
