@@ -12,86 +12,55 @@
 
 #include "libft.h"
 
-int	ft_len(int m)
+static long	ft_digitnb(int n)
 {
-	int	i;
+	long		size;
 
-	i = 0;
-	if (m == -2147483648)
-		return (11);
-	if (m < 0)
-	{
-		i++;
-		m *= -1;
-	}
-	while (m != 0)
-	{
-		m = m / 10;
-		i++;
-	}
-	return (i);
-}
-
-char	*ft_create_s(char *s, int n, int len, int i)
-{
-	if (n == -2147483648)
-	{
-		s[0] = '-';
-		s[1] = '2';
-		n = 147483648;
-		i = 2;
-	}
+	if (n == 0)
+		return (1);
+	size = 0;
 	if (n < 0)
 	{
-		s[i] = '-';
-		i++;
-		n *= -1;
+		size++;
+		n = -n;
 	}
-	s[len] = '\0';
-	len--;
-	while (i <= len)
+	while (n != 0)
 	{
-		s[len] = n % 10 + '0';
 		n /= 10;
-		len--;
+		size++;
 	}
-	return (s);
+	return (size++);
 }
 
-/*char	*ft_cs_itoa(char *s, int i, int len, int n)
+static int	ft_sign(int n)
 {
-	while (i < len)
-	{
-		printf("\n\n\nHOBAA\n\n\n");
-		if (n < 10 && n >= 0)
-		{
-			s[i] = n + '0';
-			s++;
-			i++;
-		}
-		else
-		{
-			
-			ft_cs_itoa(s, i, len, n/10);
-			ft_cs_itoa(s, i, len, n%10);
-		}
-	}
-	s[i] = '\0';
-	return (s);
+	if (n < 0)
+		return (1);
+	return (0);
 }
-*/
 
 char	*ft_itoa(int n)
 {
-	int		len;
-	int		i;
-	char	*s;
+	long		n_long;
+	long		length;
+	char		*fresh;
 
-	i = 0;
-	len = ft_len(n);
-	s = (char *)malloc(sizeof(char) * (len + 1));
-	if (!s)
+	n_long = n;
+	length = ft_digitnb(n_long);
+	fresh = (char *)malloc((length + 1) * sizeof(char));
+	if (!fresh)
 		return (NULL);
-	ft_create_s(s, n, len, i);
-	return (s);
+	fresh[length] = '\0';
+	length--;
+	if (n_long < 0)
+		n_long = -n_long;
+	while (length >= 0)
+	{
+		fresh[length] = (n_long % 10) + '0';
+		length--;
+		n_long /= 10;
+	}
+	if (ft_sign(n))
+		fresh[0] = '-';
+	return (fresh);
 }
