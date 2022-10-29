@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: misler <misler@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 19:33:55 by misler            #+#    #+#             */
-/*   Updated: 2022/10/29 01:28:05 by misler           ###   ########.fr       */
+/*   Created: 2022/10/29 21:38:19 by misler            #+#    #+#             */
+/*   Updated: 2022/10/30 01:10:28 by misler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	*ft_calloc(size_t nelem, size_t elsize)
-/*bildik calloc. İçi boş dizi oluşturduk*/
 {
 	char			*ptr;
 	unsigned int	i;
@@ -22,35 +21,29 @@ void	*ft_calloc(size_t nelem, size_t elsize)
 	i = 0;
 	x = nelem * elsize;
 	ptr = (char *)malloc(x);
-	if (ptr == NULL)
-		return (0);
+	if (!ptr)
+		return (NULL);
 	while (i < x)
 	{
-		ptr[i] = '\0';
+		ptr[i] = 0;
 		i++;
 	}
 	return (ptr);
 }
 
 char	*ft_update_nl(char **next_line, int position)
-/* next_line dizisinden position kadar ilerisinden sonrasıyla yeni bir dizi oluşturur
-** oluşturulan bu diziyi döndürür.*/
 {
 	char	*tmp;
 	int		len;
 
 	len = ft_strlen(*next_line) - position;
 	tmp = ft_strndup(*next_line + position, len);
-	ft_free(next_line);
+	ft_free(&*next_line);
 	*next_line = tmp;
 	return (*next_line);
 }
 
 char	*ft_output(char **next_line, int position, int bytes)
-/* İlk if bloğunda hata ayıklaması yaptık
-**next_line'ın her karakterini yeni satır veya null görene kadar hafızaya alduk.
-**yeni satır görünce de geri kalan karakterleri de ft_update_nl ile yeniden hafızada tuttuk
-*/
 {
 	char	*line;
 
@@ -67,43 +60,35 @@ char	*ft_output(char **next_line, int position, int bytes)
 		position++;
 	line = ft_strndup(*next_line, position);
 	if (position == ft_strlen(*next_line))
-		ft_free(next_line);
+		ft_free(&*next_line);
 	else
-		*next_line = ft_update_nl(next_line, position);
+		*next_line = ft_update_nl(&*next_line, position);
 	return (line);
 }
 
 char	*get_next_line(int fd)
-/*Okunacak kadar okuyup next_line'a eşitle
-**yeni satır bulana kadar git, dosya sonuna ulaşırsan null
-**buff: okunacak yer
-**position: '\n' olduğu yer
-**sonraki satır null ise position -5 olur
-**bytes: kaç byte okunacak*/
 {
-	static char	*next_line;
+	static char	*next_line[10240];
 	char		*buff;
 	int			position;
 	int			bytes;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || fd > 1024)
-	{
+	if (BUFFER_SIZE <= 0 || fd < 0 || fd > 10240)
 		return (NULL);
-	}
 	buff = NULL;
-	position = ft_strchr(next_line, '\n', 0);
+	position = ft_strchr(next_line[fd], '\n', 0);
 	while (position == -1 && position != -5)
 	{
 		buff = ft_calloc(BUFFER_SIZE + 1, 1);
 		if (buff == NULL)
 			return (NULL);
 		bytes = read(fd, buff, BUFFER_SIZE);
-		if (bytes == -1 || bytes == 0)
+		if (bytes == 0 || bytes == -1)
 			break ;
-		next_line = ft_strnjoin(next_line, buff, bytes);
-		position = ft_strchr(next_line, '\n', 1);
+		next_line[fd] = ft_strnjoin(next_line[fd], buff, bytes);
+		position = ft_strchr(next_line[fd], '\n', 1);
 		ft_free(&buff);
 	}
 	ft_free(&buff);
-	return (ft_output(&next_line, position, bytes));
+	return (ft_output(&next_line[fd], position, bytes));
 }

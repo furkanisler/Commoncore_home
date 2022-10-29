@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: misler <misler@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 20:56:37 by misler            #+#    #+#             */
-/*   Updated: 2022/10/29 01:51:46 by misler           ###   ########.fr       */
+/*   Created: 2021/08/05 14:56:29 by tblaase           #+#    #+#             */
+/*   Updated: 2022/10/30 01:14:57 by misler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 void	ft_free(char **p)
-/*gelen pointer free yapılır
-**sonra da NULL yapılır*/
+/* pointer var mı diye kontrol ettik, varsa null yaptık */
 {
+	if (!*p)
+		return ;
 	free(*p);
 	*p = NULL;
 }
 
 int	ft_strlen(char *s)
+/* dizi uzunluğuna bakarız */
 {
 	int	i;
 
@@ -28,20 +30,20 @@ int	ft_strlen(char *s)
 	if (!s)
 		return (0);
 	while (s && s[i])
+	{
 		i++;
+	}
 	return (i);
 }
 
 int	ft_strchr(char *s, int c, int flag)
-/*s stringinin içinde c'yi arar bulursa indisini int olarak döndürür
-**flag 1 olursa ve de s NULL ise -5 döndürür
-**flag 0 olursa ve de s NULL ise -1 döndürür*/
+/* verilen karakteri dizide arayıp indisini döndürüyoruz */
 {
 	int	i;
 
-	i = 0;
 	if (flag == 1 && !s)
 		return (-5);
+	i = 0;
 	while (s && s[i])
 	{
 		if (s[i] == c)
@@ -52,39 +54,37 @@ int	ft_strchr(char *s, int c, int flag)
 }
 
 char	*ft_strnjoin(char *s1, char *s2, int n)
-/*iki stringi birleştirir
-**ikinci stringten n kadar birincinin sonuna ekler
-**yeni bir dizi oluşturur ve onu döndürür*/
+/* iki stringi birleştiriyoruz (n kadar) */
 {
-	char	*output;
+	char	*c;
 	int		i;
-	int		j;
+	int		i2;
 
 	i = 0;
-	j = 0;
-	if (s2[j] == '\0')
+	i2 = 0;
+	if (s2[i2] == '\0')
 		return (NULL);
-	output = malloc(ft_strlen(s1) + n + 1);
-	if (!output)
+	c = malloc(ft_strlen(s1) + n + 1);
+	if (!c)
 		return (NULL);
 	if (s1 != NULL)
 	{
 		while (s1[i] != '\0')
 		{
-			output[i] = s1[i];
+			c[i] = s1[i];
 			i++;
 		}
 	}
-	while (s2 && s2[i] != !'\0' && j < n)
-		output[i++] = s2[j++];
-	output[i] = '\0';
+	while (s2 && s2[i2] != '\0' && i2 < n)
+		c[i++] = s2[i2++];
+	c[i] = '\0';
 	if (s1)
 		ft_free(&s1);
-	return (output);
+	return (c);
 }
 
 char	*ft_strndup(char *input, int n)
-/*gelen stringi kopyalar*/
+/* verilen stringten n kadarının kopyasını alıyoruz */
 {
 	char	*output;
 	int		len;
@@ -94,9 +94,7 @@ char	*ft_strndup(char *input, int n)
 	len = n;
 	output = malloc(len + 1);
 	if (!output)
-	{
 		return (NULL);
-	}
 	while (input && input[i] != '\0' && i < n)
 	{
 		output[i] = input[i];

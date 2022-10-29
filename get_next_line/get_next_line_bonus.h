@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: misler <misler@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/28 18:25:51 by misler            #+#    #+#             */
-/*   Updated: 2022/10/29 02:03:54 by misler           ###   ########.fr       */
+/*   Created: 2022/10/29 21:28:23 by misler            #+#    #+#             */
+/*   Updated: 2022/10/30 00:56:08 by misler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
-/*Burada derleme yaparken get buffer_size eklememize gerek kalmayacak.
-**Çünkü buffer_size'ı tanımladım */
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
