@@ -39,8 +39,7 @@ SRC		=	ft_atoi.c\
 			ft_tolower.c\
 			ft_toupper.c\
 			ft_itoa_base.c\
-			
-BONUS	=	ft_lstnew.c\
+			ft_lstnew.c\
 			ft_lstadd_front.c\
 			ft_lstsize.c\
 			ft_lstlast.c\
@@ -52,24 +51,18 @@ BONUS	=	ft_lstnew.c\
 
 OBJ		=	$(SRC:.c=.o)
 
-OBJ_BON	=	$(BONUS:.c=.o)
-
 all		:	$(NAME)
 
 $(NAME)	:
 	@$(CC) $(GFLAGS) -c $(SRC) -I includes
 	@ar rc $(NAME) $(OBJ)
 
-bonus	:
-	@$(CC) $(CFLAGS) -c $(BONUS) -I includes
-	@ar rc $(NAME) $(OBJ_BON)
-
 clean	:
-	@rm -f $(OBJ) $(OBJ_BON)
+	@rm -f $(OBJ)
 
 fclean	: clean
 	@rm -f $(NAME)
 
 re		: fclean all
 
-.PHONY	: all bonus clean fclean re
+.PHONY	: all clean fclean re

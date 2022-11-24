@@ -6,7 +6,7 @@
 /*   By: misler <misler@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 02:00:55 by misler            #+#    #+#             */
-/*   Updated: 2022/11/23 07:03:36 by misler           ###   ########.fr       */
+/*   Updated: 2022/11/25 01:48:14 by misler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_input_parser(const char *str, va_list args)
 			pos++;
 			if (ft_is_argument(str[pos]))
 				i = i + ft_formats(str[pos], args);
-			else if (str[pos, 1])
+			else if (str[pos])
 				i = i + ft_putchar_fd(str[pos], 1);
 		}
 		pos++;
