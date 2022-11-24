@@ -6,7 +6,7 @@
 /*   By: misler <misler@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:33:55 by misler            #+#    #+#             */
-/*   Updated: 2022/10/29 01:28:05 by misler           ###   ########.fr       */
+/*   Updated: 2022/11/24 18:08:33 by misler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	*get_next_line(int fd)
 	}
 	buff = NULL;
 	position = ft_strchr(next_line, '\n', 0);
-	while (position == -1 && position != -5)
+	while (position == -1)
 	{
 		buff = ft_calloc(BUFFER_SIZE + 1, 1);
 		if (buff == NULL)
