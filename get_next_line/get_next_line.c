@@ -6,7 +6,7 @@
 /*   By: misler <misler@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:33:55 by misler            #+#    #+#             */
-/*   Updated: 2022/10/29 01:28:05 by misler           ###   ########.fr       */
+/*   Updated: 2022/12/01 14:42:16 by misler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ char	*ft_output(char **next_line, int position, int bytes)
 char	*get_next_line(int fd)
 /*Okunacak kadar okuyup next_line'a eşitle
 **yeni satır bulana kadar git, dosya sonuna ulaşırsan null
-**buff: okunacak yer
+**buff: okunacak karakter sayısı
 **position: '\n' olduğu yer
 **sonraki satır null ise position -5 olur
 **bytes: kaç byte okunacak*/
@@ -92,7 +92,7 @@ char	*get_next_line(int fd)
 	}
 	buff = NULL;
 	position = ft_strchr(next_line, '\n', 0);
-	while (position == -1 && position != -5)
+	while (position == -1)
 	{
 		buff = ft_calloc(BUFFER_SIZE + 1, 1);
 		if (buff == NULL)
