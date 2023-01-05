@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "algorithm": "c",
+        "cstdarg": "c",
+        "__locale": "cpp"
+    }
+}

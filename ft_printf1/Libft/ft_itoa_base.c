@@ -6,7 +6,7 @@
 /*   By: misler <misler@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 15:12:07 by elraira-          #+#    #+#             */
-/*   Updated: 2022/11/24 02:05:16 by misler           ###   ########.fr       */
+/*   Updated: 2023/01/05 19:43:09 by misler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ char	*ft_itoa_base(unsigned long long n, char *base)
 	base_len = ft_strlen(base);
 	str = ft_calloc((num_len + 1), sizeof(char));
 	if (!str)
-		return (NULL);
+		return (0);
 	while (num_len)
 	{
 		num_len = num_len - 1;

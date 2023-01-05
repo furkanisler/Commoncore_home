@@ -6,7 +6,7 @@
 /*   By: misler <misler@student.42kocaeli.com.tr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 20:56:37 by misler            #+#    #+#             */
-/*   Updated: 2022/10/29 01:51:46 by misler           ###   ########.fr       */
+/*   Updated: 2022/12/08 14:33:57 by misler           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*ft_strnjoin(char *s1, char *s2, int n)
 			i++;
 		}
 	}
-	while (s2 && s2[i] != !'\0' && j < n)
+	while (s2 && s2[j] != !'\0' && j < n)
 		output[i++] = s2[j++];
 	output[i] = '\0';
 	if (s1)
